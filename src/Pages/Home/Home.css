@@ -1,5 +1,0 @@
-.overlay {
-  background-image: linear-gradient(rgb(0, 0, 0, 0.1), rgb(0, 0, 0, 1));
-  opacity: 1;
-  transition: opacity 0.3s;
-}

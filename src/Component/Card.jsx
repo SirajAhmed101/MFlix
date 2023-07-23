@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { img_300, unavailable } from "../Config/config";
 import { AiFillStar } from "react-icons/ai";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import "../Pages/Home/Home.css";
+import "react-loading-skeleton/dist/skeleton.css";
+import "../Pages/Home";
 
 const SingleCard = ({ movie }) => {
   const { id, poster_path, title, release_date, vote_average, overview } =
@@ -26,13 +27,13 @@ const SingleCard = ({ movie }) => {
           </SkeletonTheme>
         </div>
       ) : (
-        <Link to={`/movie/${id}`}>
+        <Link to={`/movies/${id}`}>
           <div className="cards inline-block cursor-pointer h-[full] relative  transition-transform  duration-200 rounded-xl overflow-hidden m-[0.19rem] poiter z-0 border border-solid border-[#636363] hover:scale-110 hover:z-50 hover:shadow-xl">
             <img
               src={`${img_300}${movie ? poster_path : unavailable}`}
               alt={title}
             />
-            <div className="overlay absolute bottom-0 pt-0 px-4 pb-4 flex flex-col justify-end opacity-0 transition-opacity duration-200 hover:opacity-100 text-white h-[100%]">
+            <div className="bg-bg-overlay opacity-1 absolute bottom-0 pt-0 px-4 pb-4 flex flex-col justify-end opacity-0 transition-opacity duration-200 hover:opacity-100 text-white h-[100%]">
               <div className=" font-extrabold text-base mb-2">
                 {movie ? title : ""}
               </div>
