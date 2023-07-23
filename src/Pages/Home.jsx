@@ -8,14 +8,14 @@ import MovieList from "./MovieList";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const [trendingMovies, setTrendingMovies] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
   const fetchTrending = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/movie/popular?api_key=${
         import.meta.env.VITE_API_KEY
       }`
     );
-    setTrendingMovies(data.results);
+    setPopularMovies(data.results);
   };
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const Home = () => {
         infiniteLoop={true}
         showStatus={false}
       >
-        {trendingMovies.map((movie) => {
+        {popularMovies.map((movie) => {
           return (
             <>
               <Link to={`movies/${movie.id}`}>
@@ -42,7 +42,7 @@ const Home = () => {
                     className="h-full w-full m-auto block   "
                   />
                 </div>
-                <div className="overlay bg-bg-overlay opacity-1 bg-transition absolute p-[5rem] bottom-0 h-[100%] flex flex-col w-full justify-end items-start text-[#bbb]">
+                <div className="overlay bg-bg-overlay opacity-1  absolute p-[5rem] bottom-0 h-[100%] flex flex-col w-full justify-end items-start text-[#bbb]">
                   <div className=" text-[3rem] text-left font-bold mb-[0.4rem] text-white">
                     {movie ? movie.original_title : ""}
                   </div>

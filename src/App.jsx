@@ -3,7 +3,6 @@ import Home from "./Pages/Home";
 import "./App.css";
 import MovieList from "./Pages/MovieList";
 import Tv from "./Pages/Tv";
-import Animation from "./Pages/Animation";
 import PageNotFound from "./Pages/PageNotFound";
 import Navbar from "./Component//Navbar";
 import MovieDetails from "./Pages/MovieDetails";
@@ -18,7 +17,6 @@ function App() {
           <Route path="/movies" element={<MovieList />} />
           <Route path="movies/:id" element={<MovieDetails />} />
           <Route path="/tv" element={<Tv />} />
-          <Route path="/kids" element={<Animation />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

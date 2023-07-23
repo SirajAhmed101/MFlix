@@ -3,19 +3,23 @@ import { AiFillStar } from "react-icons/ai";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { img_300, img_original } from "../Config/config";
-import { BsCollectionPlayFill } from "react-icons/bs";
 import YouTube from "react-youtube";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import SingleCard from "../Component/Card";
 
 const MovieDetails = () => {
   const { id } = useParams();
 
   const [currentMovieDetail, setCurrentMovieDetail] = useState([]);
+  const [movieCast, setMovieCast] = useState([]);
+  const [similerMovies, setSimilerMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchMovieById();
+    getMovieDetails();
+    getMovieCast();
+    getSimilerMovies();
     window.scrollTo(0, 0);
   }, [id]);
 
@@ -25,7 +29,7 @@ const MovieDetails = () => {
     }, 1500);
   }, []);
 
-  const fetchMovieById = async () => {
+  const getMovieDetails = async () => {
     try {
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/movie/${id}?api_key=${
@@ -38,6 +42,38 @@ const MovieDetails = () => {
       console.log("ApiError");
     }
   };
+
+  const getSimilerMovies = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${
+          import.meta.env.VITE_API_KEY
+        }&append_to_response=videos`
+      );
+
+      setSimilerMovies(data.results);
+    } catch (error) {
+      console.log("ApiError");
+    }
+  };
+
+  const getMovieCast = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${
+          import.meta.env.VITE_API_KEY
+        }&language=en-US`
+      );
+      const cast = data.cast.slice(0, 6);
+      setMovieCast(cast);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  {
+    console.log(similerMovies);
+  }
 
   const opts = {
     height: "390",
@@ -69,6 +105,7 @@ const MovieDetails = () => {
       ) : (
         currentMovieDetail && (
           <div className="relative flex flex-col items-center w-full">
+            {/* Movie-Details */}
             <div className="w-[80%] ">
               <img
                 src={`${img_original}${currentMovieDetail.backdrop_path}`}
@@ -86,9 +123,10 @@ const MovieDetails = () => {
                   />
                 </div>
               </div>
-
+              {/* About-Movie */}
               <div className="movie__detailRight text-white flex flex-col justify-between h-[450px]">
                 <div className="movie-details-top">
+                  {/* Movie-title */}
                   <div className="text-4xl font-semibold drop-shadow-3xl mb-[.5rem]">
                     {currentMovieDetail && currentMovieDetail.original_title}
                   </div>
@@ -134,30 +172,41 @@ const MovieDetails = () => {
                   <div className="ml-auto">
                     {currentMovieDetail && currentMovieDetail.overview}
                   </div>
-
-                  <div className="w-[30%]">
-                    <div className=" mt-14 drop-shadow-3xl hover:bg-[#020916] hover:text-white bg-white text-[#020916] cursor-pointer text-xl rounded-3xl  border-2 border-white py-2   font-semibold w-full">
-                      <a
-                        href={currentMovieDetail.homepage}
-                        target="_blank"
-                        className="flex justify-center items-center text-center"
-                      >
-                        <BsCollectionPlayFill className="mr-2" size={25} />{" "}
-                        <span>WatchTrailer</span>
-                      </a>
-                    </div>
-                  </div>
                 </div>
+              </div>
+            </div>
+            {/* Movie-Cast */}
+
+            <div className="movie-cast  w-[75%] absolute top-[50rem] ">
+              <h1 className="text-4xl text-yellow-300 mb-7 font-semibold ">
+                Cast
+              </h1>
+              <div className="flex gap-2">
+                {movieCast &&
+                  movieCast.map((cast) => {
+                    return (
+                      <div className="w-full h-[200px] ">
+                        <img
+                          src={`${img_original}${cast.profile_path}`}
+                          alt=""
+                          className="w-full h-full object-cover object-top"
+                        />
+                        <div className="cast-details text-center">
+                          <h1 className="text-white">{cast.original_name}</h1>
+                          <p className="text-white">{cast.character}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
               </div>
             </div>
 
             {/* Movie-Trailer */}
-            <div className="movie-trailer  w-[75%] absolute top-[50rem]">
+            <div className="movie-trailer  w-[75%] absolute top-[75rem]">
               {filterResults ? (
                 <>
-                  <h1 className="text-4xl text-white mb-7 font-semibold ">
-                    Videos
-                    <sup className="text-yellow-300">{filterResults?.name}</sup>
+                  <h1 className="text-4xl text-yellow-300 mb-7 font-semibold ">
+                    {filterResults?.name}
                   </h1>
                   <div className="flex justify-center items-center">
                     <YouTube
@@ -169,8 +218,8 @@ const MovieDetails = () => {
                 </>
               ) : (
                 <>
-                  <h1 className="text-4xl text-white mb-7 font-semibold ">
-                    Videos
+                  <h1 className="text-4xl text-yellow-300 mb-7 font-semibold ">
+                    {currentMovieDetail.videos?.results[0]?.name}
                   </h1>
                   <div className="flex justify-center flex-col items-center">
                     <YouTube
@@ -181,6 +230,19 @@ const MovieDetails = () => {
                   </div>
                 </>
               )}
+            </div>
+
+            {/* Similier-Movies */}
+            <div className="absolute top-[110rem]  w-[75%]">
+              <h1 className="text-4xl text-yellow-300 mb-7 font-semibold ">
+                Similer Movies
+              </h1>
+              <div className="grid grid-cols-4">
+                {similerMovies &&
+                  similerMovies?.map((movie, i) => {
+                    return <SingleCard movie={movie} key={i} />;
+                  })}
+              </div>
             </div>
           </div>
         )
