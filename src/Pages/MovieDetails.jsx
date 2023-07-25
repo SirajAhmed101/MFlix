@@ -48,7 +48,7 @@ const MovieDetails = () => {
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${
           import.meta.env.VITE_API_KEY
-        }&append_to_response=videos`
+        }`
       );
 
       setSimilerMovies(data.results);
@@ -70,10 +70,6 @@ const MovieDetails = () => {
       console.log(error.message);
     }
   };
-
-  {
-    console.log(similerMovies);
-  }
 
   const opts = {
     height: "390",
@@ -106,14 +102,15 @@ const MovieDetails = () => {
         currentMovieDetail && (
           <div className="relative flex flex-col items-center w-full">
             {/* Movie-Details */}
-            <div className="w-[80%] ">
+            <div className="w-[85%] relative">
               <img
                 src={`${img_original}${currentMovieDetail.backdrop_path}`}
                 alt={currentMovieDetail.title}
-                className="w-full h-[500px] object-cover object-top "
+                className="w-full h-[500px] object-cover object-center"
               />
+              <div className="overlay absolute w-full h-[500px] bg-bg-overlay opacity-[0.7] text-white top-0"></div>
             </div>
-            <div className="movie-details relative flex w-[75%] bottom-[225px] items-center">
+            <div className="movie-details relative flex w-[75%] bottom-[225px] items-center  ">
               <div className="movie__detailLeft mr-7">
                 <div className="movie-poster w-[300px]">
                   <img
@@ -176,7 +173,6 @@ const MovieDetails = () => {
               </div>
             </div>
             {/* Movie-Cast */}
-
             <div className="movie-cast  w-[75%] absolute top-[50rem] ">
               <h1 className="text-4xl text-yellow-300 mb-7 font-semibold ">
                 Cast
@@ -200,7 +196,6 @@ const MovieDetails = () => {
                   })}
               </div>
             </div>
-
             {/* Movie-Trailer */}
             <div className="movie-trailer  w-[75%] absolute top-[75rem]">
               {filterResults ? (
@@ -231,18 +226,24 @@ const MovieDetails = () => {
                 </>
               )}
             </div>
-
             {/* Similier-Movies */}
+
             <div className="absolute top-[110rem]  w-[75%]">
               <h1 className="text-4xl text-yellow-300 mb-7 font-semibold ">
                 Similer Movies
               </h1>
-              <div className="grid grid-cols-4">
-                {similerMovies &&
-                  similerMovies?.map((movie, i) => {
+
+              {similerMovies.length === 0 ? (
+                <p className="text-4xl text-yellow-300 mb-7 font-semibold ">
+                  404: Error Not Found
+                </p>
+              ) : (
+                <div className="grid grid-cols-4">
+                  {similerMovies?.map((movie, i) => {
                     return <SingleCard movie={movie} key={i} />;
                   })}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         )

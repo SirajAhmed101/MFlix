@@ -21,18 +21,6 @@ const Navbar = () => {
           </div>
 
           <div className="flex md:order-2">
-            <div className="relative hidden md:block">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <BsSearch />
-              </div>
-              <input
-                type="text"
-                id="search-navbar"
-                className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search..."
-              />
-            </div>
-
             <button
               data-collapse-toggle="navbar-search"
               type="button"
@@ -56,23 +44,11 @@ const Navbar = () => {
             } w-full md:flex md:w-auto md:order-1`}
             id="navbar-search"
           >
-            <div className="relative mt-3 md:hidden">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <BsSearch />
-              </div>
-              <input
-                type="text"
-                id="search-navbar"
-                className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search..."
-              />
-            </div>
-
             <ul className="text-[#bbb] flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
                 <NavLink
                   to="/"
-                  className="block py-2 pl-3 pr-4 text-white rounded md:bg-transparent md:text-green-500 md:p-0 md:dark:text-green-600"
+                  className="block py-2 pl-3 pr-4 text-white rounded md:bg-transparent md:p-0 "
                   aria-current="page"
                 >
                   Home
@@ -81,17 +57,27 @@ const Navbar = () => {
               <li>
                 <NavLink
                   to="/movies"
-                  className="block py-2 pl-3 pr-4 text-[#bbb] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-500 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className="
+                  block py-2 pl-3 pr-4 text-[#bbb] rounded  hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-500 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Movies
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/Tv"
+                  to="/top-rated"
                   className="block py-2 pl-3 pr-4 text-[#bbb] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
-                  TV
+                  Top Rated
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/search-movies"
+                  className="flex items-center py-2 pl-3 pr-4 text-[#bbb] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  <BsSearch className="mr-2" />
+                  Search Movies
                 </NavLink>
               </li>
             </ul>

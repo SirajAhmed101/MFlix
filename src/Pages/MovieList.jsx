@@ -54,7 +54,7 @@ const MovieList = () => {
   return (
     <div className="px-5 py-5">
       <div>
-        <h2 className=" uppercase mb-4 text-4xl text-yellow-300 font-semibold py-5">
+        <h2 className=" uppercase mb-4 text-4xl text-yellow-300 font-semibold py-5  text-center">
           Latest
         </h2>
         <div className="grid grid-cols-6  ">
@@ -66,7 +66,7 @@ const MovieList = () => {
       </div>
 
       <div>
-        <h2 className=" uppercase mb-4 text-4xl text-yellow-300 font-semibold py-5">
+        <h2 className=" uppercase mb-4 text-4xl text-yellow-300 font-semibold py-5  text-center">
           Trending
         </h2>
         <div className="grid grid-cols-6  ">
@@ -78,7 +78,7 @@ const MovieList = () => {
       </div>
 
       <div>
-        <h2 className=" uppercase mb-4 text-4xl text-yellow-300 font-semibold py-5">
+        <h2 className=" uppercase mb-4 text-4xl text-yellow-300 font-semibold py-5  text-center">
           Upcoming
         </h2>
         <div className="grid grid-cols-6  ">
