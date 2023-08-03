@@ -85,7 +85,7 @@ const MovieDetails = () => {
     currentMovieDetail &&
     currentMovieDetail.videos &&
     currentMovieDetail.videos.results.find((video) => {
-      return video.name === "Official Trailer";
+      return video.name === "Official Trailer" || video.site === "YouTube";
     });
 
   return (
@@ -198,7 +198,7 @@ const MovieDetails = () => {
             </div>
             {/* Movie-Trailer */}
             <div className="movie-trailer  w-[75%] absolute top-[75rem]">
-              {filterResults ? (
+              {filterResults && (
                 <>
                   <h1 className="text-4xl text-yellow-300 mb-7 font-semibold ">
                     {filterResults?.name}
@@ -206,19 +206,6 @@ const MovieDetails = () => {
                   <div className="flex justify-center items-center">
                     <YouTube
                       videoId={filterResults?.key}
-                      opts={opts}
-                      onReady={onPlayerReady}
-                    />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <h1 className="text-4xl text-yellow-300 mb-7 font-semibold ">
-                    {currentMovieDetail.videos?.results[0]?.name}
-                  </h1>
-                  <div className="flex justify-center flex-col items-center">
-                    <YouTube
-                      videoId={currentMovieDetail.videos?.results[0]?.key}
                       opts={opts}
                       onReady={onPlayerReady}
                     />
