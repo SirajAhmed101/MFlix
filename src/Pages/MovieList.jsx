@@ -54,10 +54,10 @@ const MovieList = () => {
   return (
     <div className="px-5 py-5">
       <div>
-        <h2 className=" uppercase mb-4 text-4xl text-yellow-300 font-semibold py-5  text-center">
+        <h2 className=" uppercase mb-4 text-4xl text-yellow-300 font-semibold py-5  text-center ">
           Latest
         </h2>
-        <div className="grid grid-cols-6  ">
+        <div className="grid xl:grid-cols-6 max-xl:grid-cols-4 max-md:grid-cols-2 max-[425px]:grid-cols-1">
           {latestMovies &&
             latestMovies.map((movie, i) => {
               return <SingleCard movie={movie} key={i} />;
@@ -69,7 +69,7 @@ const MovieList = () => {
         <h2 className=" uppercase mb-4 text-4xl text-yellow-300 font-semibold py-5  text-center">
           Trending
         </h2>
-        <div className="grid grid-cols-6  ">
+        <div className="grid xl:grid-cols-6 max-xl:grid-cols-4 max-md:grid-cols-2 max-[425px]:grid-cols-1">
           {trandingMovies &&
             trandingMovies.map((movie, i) => {
               return <SingleCard movie={movie} key={i} />;
@@ -81,7 +81,7 @@ const MovieList = () => {
         <h2 className=" uppercase mb-4 text-4xl text-yellow-300 font-semibold py-5  text-center">
           Upcoming
         </h2>
-        <div className="grid grid-cols-6  ">
+        <div className="grid xl:grid-cols-6 max-xl:grid-cols-4 max-md:grid-cols-2 max-[425px]:grid-cols-1">
           {upcomingMovies &&
             upcomingMovies.map((movie, i) => {
               return <SingleCard movie={movie} key={i} />;

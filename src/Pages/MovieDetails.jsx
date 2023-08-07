@@ -102,7 +102,7 @@ const MovieDetails = () => {
         currentMovieDetail && (
           <div className="relative flex flex-col items-center w-full">
             {/* Movie-Details */}
-            <div className="w-[85%] relative">
+            <div className="w-[85%] relative max-lg:hidden">
               <img
                 src={`${img_original}${currentMovieDetail.backdrop_path}`}
                 alt={currentMovieDetail.title}
@@ -110,7 +110,7 @@ const MovieDetails = () => {
               />
               <div className="overlay absolute w-full h-[500px] bg-bg-overlay opacity-[0.7] text-white top-0"></div>
             </div>
-            <div className="movie-details relative flex w-[75%] bottom-[225px] items-center  ">
+            <div className="movie-details relative flex w-[75%] bottom-[225px] items-center max-lg:top-[50px] max-lg:flex-col">
               <div className="movie__detailLeft mr-7">
                 <div className="movie-poster w-[300px]">
                   <img
@@ -173,7 +173,7 @@ const MovieDetails = () => {
               </div>
             </div>
             {/* Movie-Cast */}
-            <div className="movie-cast  w-[75%] absolute top-[50rem] ">
+            <div className="movie-cast  w-[75%] absolute top-[50rem] max-lg:top-[65rem]">
               <h1 className="text-4xl text-yellow-300 mb-7 font-semibold ">
                 Cast
               </h1>
@@ -197,7 +197,7 @@ const MovieDetails = () => {
               </div>
             </div>
             {/* Movie-Trailer */}
-            <div className="movie-trailer  w-[75%] absolute top-[75rem]">
+            <div className="movie-trailer  w-[75%] absolute top-[75rem] max-lg:top-[90rem]">
               {filterResults && (
                 <>
                   <h1 className="text-4xl text-yellow-300 mb-7 font-semibold ">
@@ -215,7 +215,7 @@ const MovieDetails = () => {
             </div>
             {/* Similier-Movies */}
 
-            <div className="absolute top-[110rem]  w-[75%]">
+            <div className="absolute top-[110rem]  w-[75%] max-lg:top-[125rem]">
               <h1 className="text-4xl text-yellow-300 mb-7 font-semibold ">
                 Similer Movies
               </h1>
@@ -225,7 +225,7 @@ const MovieDetails = () => {
                   404: Error Not Found
                 </p>
               ) : (
-                <div className="grid grid-cols-4">
+                <div className="grid grid-cols-4 max-xl:grid-cols-4 max-md:grid-cols-2 max-[425px]:grid-cols-1">
                   {similerMovies?.map((movie, i) => {
                     return <SingleCard movie={movie} key={i} />;
                   })}
